@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title','Admin - Consents')
 
 @section('content')
-  <h1>Consent Records</h1>
+  <h2>Consent Records</h2><br>
 
   <table style="width:100%;border-collapse:collapse;">
     <thead>
@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($consents as $c)
+      {{-- @foreach($consents as $c)
         <tr>
           <td>{{ $c->id }}</td>
           <td>{{ $c->guid }}</td>
@@ -28,11 +28,11 @@
           <td>{{ $c->ip }}</td>
           <td style="max-width:300px;word-break:break-word;">{{ $c->user_agent }}</td>
         </tr>
-      @endforeach
+      @endforeach --}}
     </tbody>
   </table>
 
   <div style="margin-top:1rem;">
-    {{ $consents->links() }}
+    {{-- {{ $consents->links() }} --}}
   </div>
 @endsection

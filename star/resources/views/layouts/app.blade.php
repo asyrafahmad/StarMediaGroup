@@ -77,15 +77,21 @@
   @stack('styles')
 </head>
 <body>
-  <nav style="background:#0b74de;color:#fff;padding:.75rem;">
-    <div class="container" style="display:flex;gap:1rem;align-items:center;">
-      <a href="{{ route('home') }}" style="color:#fff;text-decoration:none;font-weight:600">MySite</a>
-      <div style="margin-left:1rem;">
-        <a href="{{ route('home') }}"  style="color:#fff;margin-right:12px;">Home</a>
-        <a href="{{ route('about') }}" style="color:#fff;margin-right:12px;">About</a>
-        <a href="{{ route('privacy') }}" style="color:#fff;margin-right:12px;">Privacy</a>
-        <a href="{{ route('terms') }}" style="color:#fff;">Terms</a>
-      </div>
+  <nav style="background:#da2128;color:#fff;padding:.75rem;">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <a href="{{ route('home') }}" style="color:#fff;text-decoration:none;font-weight:600;">Star Media Group</a>
+            <div>
+                <a href="{{ route('home') }}"  style="color:#fff;margin-right:12px;">Home</a>
+                <a href="{{ route('about') }}" style="color:#fff;margin-right:12px;">About</a>
+                <a href="{{ route('privacy') }}" style="color:#fff;margin-right:12px;">Privacy</a>
+                <a href="{{ route('terms') }}" style="color:#fff;">Terms</a>
+            </div>
+        </div>
+        <div>
+            <a href="{{ route('login') }}"  style="color:#fff;">Login</a>
+            <a href="{{ route('register') }}"  style="color:#fff;margin-left:12px;">Register</a>
+        </div>
     </div>
   </nav>
 
@@ -121,9 +127,6 @@
   </div>
 
   <script>
-
-
-
 
     document.addEventListener('DOMContentLoaded', function () {
         const path = window.location.pathname;

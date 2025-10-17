@@ -9,24 +9,49 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $cookie = $request->cookie('user_consent');
-
         $decoded = json_decode($cookie);
 
         return view('pages.home ', ['consent' => $decoded]);
     }
 
-    public function about()
+    public function about(Request $request)
     {
-        return view('pages.about');
+        $cookie = $request->cookie('user_consent');
+        $decoded = json_decode($cookie);
+
+        return view('pages.about', ['consent' => $decoded]);
     }
 
-    public function privacy()
+    public function privacy(Request $request)
     {
-        return view('pages.privacy');
+        $cookie = $request->cookie('user_consent');
+        $decoded = json_decode($cookie);
+
+        return view('pages.privacy', ['consent' => $decoded]);
     }
 
-    public function terms()
+    public function terms(Request $request)
     {
-        return view('pages.terms');
+        $cookie = $request->cookie('user_consent');
+        $decoded = json_decode($cookie);
+
+        return view('pages.terms', ['consent' => $decoded]);
+    }
+
+    public function login(Request $request)
+    {
+        $cookie = $request->cookie('user_consent');
+        $decoded = json_decode($cookie);
+
+        return view('pages.login', ['consent' => $decoded]);
+    }
+
+    // Show registration form
+    public function register(Request $request)
+    {
+        $cookie = $request->cookie('user_consent');
+        $decoded = json_decode($cookie);
+
+        return view('pages.register', ['consent' => $decoded]);
     }
 }
