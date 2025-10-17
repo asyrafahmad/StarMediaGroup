@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('decline_at')->nullable();
             $table->string('version')->default('1.0');
             $table->string('ip_address')->nullable();
-            $table->text('uer_agent')->nullable();
+            $table->text('user_agent')->nullable();
             $table->timestamps();
         });
     }
