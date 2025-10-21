@@ -41,11 +41,13 @@ class ConsentController extends Controller
 
     public function decline(Request $request)
     {
+        // Generate GUID
+        $guid = (string) Str::uuid();
         $now = Carbon::now();
 
         // Store decline in the database
         $consent = Consent::create([
-            'guid' => (string) Str::uuid(),
+            'guid' => $guid,
             'declined_at' => $now,
             'version' => '1.0',
             'ip_address' => $request->ip(),
@@ -54,7 +56,7 @@ class ConsentController extends Controller
 
         // Create cookie payload
         $payload = json_encode([
-            'guid' => '',
+            'guid' => $guid,
             'declined_at' => $now->toIso8601String(),
             'version' => '1.0',
         ]);
@@ -67,7 +69,7 @@ class ConsentController extends Controller
             secure = false
             httpOnly = true
         */
-        $cookie = cookie('user_consent_decline', $payload, 60 * 24, null, null, false, true);
+        $cookie = cookie('user_consent', $payload, 60 * 24, null, null, false, true);
 
         return response()->json(['message' => 'Consent declined'])->cookie($cookie);
     }

@@ -214,75 +214,69 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const path = window.location.pathname;
-      const consentButton = document.getElementById('consent-button');
-      if (path === '/terms' || path === '/privacy') {
-        consentButton.style.display = 'flex';
-      } else {
-        consentButton.style.display = 'none';
-      }
+        const path = window.location.pathname;
+        const consentButton = document.getElementById('consent-button');
 
-      const userConsent = @json($consent);
-      const overlay = document.getElementById('consent-overlay');
+        if (path === '/terms' || path === '/privacy') {
+            consentButton.style.display = 'flex';
+        } else {
+            consentButton.style.display = 'none';
+        }
 
-      if (userConsent.guid && userConsent.guid !== '') {
-        overlay.style.display = 'none';
-        document.body.classList.remove('consent-active');
-      } else {
-        overlay.style.display = 'flex';
-        document.body.classList.add('consent-active');
-      }
+        const userConsent = @json($consent);
+        const overlay = document.getElementById('consent-overlay');
+
+        if (userConsent.guid !== null) {
+            overlay.style.display = 'none';
+            document.body.classList.remove('consent-active');
+        } else {
+            overlay.style.display = 'flex';
+            document.body.classList.add('consent-active');
+        }
     });
 
-    function readCookie(name) {
-      const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-      return v ? decodeURIComponent(v.pop()) : null;
-    }
 
-    (function () {
-      const consentCookie = readCookie('site_consent');
-      const declineCookie = readCookie('site_consent_decline');
+    document.body.classList.add('consent-active');
+    const overlay = document.getElementById('consent-overlay');
+    overlay.style.display = 'flex';
 
-      if (!consentCookie && !declineCookie) {
-        document.body.classList.add('consent-active');
-        const overlay = document.getElementById('consent-overlay');
-        overlay.style.display = 'flex';
-
-        document.getElementById('accept-consent').addEventListener('click', async function () {
-          try {
+    document.getElementById('accept-consent').addEventListener('click', async function () {
+        try {
             const res = await fetch('{{ route("consent.accept") }}', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-              },
-              body: JSON.stringify({})
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({})
             });
             if (res.ok) {
-              overlay.style.display = 'none';
-              document.body.classList.remove('consent-active');
+                overlay.style.display = 'none';
+                document.body.classList.remove('consent-active');
             }
-          } catch (e) { console.error(e); }
-        });
+        } catch (e) {
+            console.error(e);
+        }
+    });
 
-        document.getElementById('decline-consent').addEventListener('click', async function () {
-          try {
+    document.getElementById('decline-consent').addEventListener('click', async function () {
+        try {
             const res = await fetch('{{ route("consent.decline") }}', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-              },
-              body: JSON.stringify({})
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({})
             });
             if (res.ok) {
-              overlay.style.display = 'none';
-              document.body.classList.remove('consent-active');
+                overlay.style.display = 'none';
+                document.body.classList.remove('consent-active');
             }
-          } catch (e) { console.error(e); }
-        });
-      }
-    })();
+        } catch (e) {
+            console.error(e);
+        }
+    });
   </script>
 
   @stack('scripts')
