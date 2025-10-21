@@ -4,5 +4,5 @@
 
 @section('content')
   <h1>Welcome to the Privacy Page</h1>
-  <p>Privacy content...</p>
+  <p>Privacy content.</p>
 @endsection

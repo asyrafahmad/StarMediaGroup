@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class ConsentController extends Controller
 {
-
+    // Handle consent acceptance
     public function accept(Request $request)
     {
         // Generate GUID
@@ -39,6 +39,7 @@ class ConsentController extends Controller
         return response()->json(['status' => 'Consent accepted'])->cookie($cookie);
     }
 
+    // Handle consent decline
     public function decline(Request $request)
     {
         // Generate GUID

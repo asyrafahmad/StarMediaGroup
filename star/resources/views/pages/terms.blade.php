@@ -4,5 +4,5 @@
 
 @section('content')
   <h1>Welcome to the Terms Page</h1>
-  <p>Terms content...</p>
+  <p>Terms content.</p>
 @endsection

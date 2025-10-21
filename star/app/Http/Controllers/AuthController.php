@@ -39,6 +39,7 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registration successful! Welcome, ' . $user->name);
     }
 
+    // Handle login
     public function login(Request $request)
     {
         try {
@@ -75,7 +76,7 @@ class AuthController extends Controller
         }
     }
 
-
+    // Handle logout
     public function logout(Request $request)
     {
         Auth::logout();

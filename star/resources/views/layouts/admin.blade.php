@@ -43,10 +43,10 @@
 
   <script>
       function toggleSidebar() {
-          const sidebar = document.getElementById('sidebar');
-          const overlay = document.getElementById('overlay');
-          sidebar.classList.toggle('active');
-          overlay.classList.toggle('active');
+          const sidebar = document.getElementById('sidebar'); // Sidebar element
+          const overlay = document.getElementById('overlay'); // Overlay element
+          sidebar.classList.toggle('active'); // Toggle sidebar visibility
+          overlay.classList.toggle('active'); // Toggle overlay visibility
       }
   </script>
 

@@ -67,9 +67,10 @@
   </div>
 
   <script>
+
     document.addEventListener('DOMContentLoaded', function () {
-        const path = window.location.pathname;
-        const consentButton = document.getElementById('consent-button');
+        const path = window.location.pathname; // Get current path
+        const consentButton = document.getElementById('consent-button'); // Consent button container
 
         if (path === '/terms' || path === '/privacy') {
             consentButton.style.display = 'flex';
@@ -77,7 +78,7 @@
             consentButton.style.display = 'none';
         }
 
-        const userConsent = @json($consent);
+        const userConsent = @json($consent);    // Get consent data from server
         const overlay = document.getElementById('consent-overlay');
 
         if (userConsent.guid !== null) {
@@ -90,10 +91,11 @@
     });
 
 
-    document.body.classList.add('consent-active');
-    const overlay = document.getElementById('consent-overlay');
+    document.body.classList.add('consent-active'); // Prevent interaction until consent given
+    const overlay = document.getElementById('consent-overlay'); // Consent overlay element
     overlay.style.display = 'flex';
 
+    // Handle accept consent API call
     document.getElementById('accept-consent').addEventListener('click', async function () {
         try {
             const res = await fetch('{{ route("consent.accept") }}', {
@@ -113,6 +115,7 @@
         }
     });
 
+    // Handle decline consent API call
     document.getElementById('decline-consent').addEventListener('click', async function () {
         try {
             const res = await fetch('{{ route("consent.decline") }}', {
