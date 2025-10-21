@@ -10,7 +10,7 @@ class Consent extends Model
     protected $fillable = [
         'guid',
         'accepted_at',
-        'decline_at',
+        'declined_at',
         'version',
         'ip_address',
         'user_agent',
@@ -18,6 +18,6 @@ class Consent extends Model
 
     protected $dates = [
         'accepted_at',
-        'decline_at',
+        'declined_at',
     ];
 }

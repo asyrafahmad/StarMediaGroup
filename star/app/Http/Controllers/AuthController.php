@@ -13,12 +13,17 @@ class AuthController extends Controller
     // Handle registration
     public function register(Request $request)
     {
+        $messages = [
+            'password.regex' => 'Password must be at least 8 characters long, contain at least one uppercase, one lowercase, one number, and one special character.',
+        ];
+
         // Validate input
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'
+],
+        ], $messages);
 
         // Create user
         $user = User::create([

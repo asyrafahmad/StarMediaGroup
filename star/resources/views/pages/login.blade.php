@@ -21,7 +21,7 @@
                 style="width:95%;padding:0.5rem;border:1px solid #ccc;border-radius:4px;">
         </div>
         <br>
-        <button type="submit" style="width:100%;padding:0.5rem;background-color:#007bff;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer;">
+        <button type="submit" style="width:100%;padding:0.5rem;background-color:#da2128;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer;">
             Login
         </button>
 

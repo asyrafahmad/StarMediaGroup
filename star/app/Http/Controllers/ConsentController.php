@@ -46,7 +46,7 @@ class ConsentController extends Controller
         // Store decline in the database
         $consent = Consent::create([
             'guid' => (string) Str::uuid(),
-            'decline_at' => $now,
+            'declined_at' => $now,
             'version' => '1.0',
             'ip_address' => $request->ip(),
             'user_agent' => $request->header('User-Agent'),
@@ -55,7 +55,7 @@ class ConsentController extends Controller
         // Create cookie payload
         $payload = json_encode([
             'guid' => '',
-            'decline_at' => $now->toIso8601String(),
+            'declined_at' => $now->toIso8601String(),
             'version' => '1.0',
         ]);
 
@@ -67,7 +67,7 @@ class ConsentController extends Controller
             secure = false
             httpOnly = true
         */
-        $cookie = cookie('user_consent', $payload, 60 * 24, null, null, false, true);
+        $cookie = cookie('user_consent_decline', $payload, 60 * 24, null, null, false, true);
 
         return response()->json(['message' => 'Consent declined'])->cookie($cookie);
     }

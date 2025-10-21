@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->uuid('guid')->unique();
             $table->timestamp('accepted_at')->nullable();
-            $table->timestamp('decline_at')->nullable();
+            $table->timestamp('declined_at')->nullable();
             $table->string('version')->default('1.0');
             $table->string('ip_address')->nullable();
             $table->text('user_agent')->nullable();

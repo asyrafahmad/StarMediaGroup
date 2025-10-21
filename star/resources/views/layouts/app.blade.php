@@ -7,91 +7,175 @@
   <title>@yield('title', 'My Site')</title>
 
   <style>
-        /* basic responsive container */
-        body {
-            margin:0;
-            font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      line-height: 1.5;
+    }
 
-        .container {
-            max-width:1000px;
-            margin:0 auto;
-            padding:1rem;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
 
-        /* Consent modal styles */
-        .consent-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
+    nav {
+      background: #da2128;
+      color: #fff;
+    }
 
-        .consent-box {
-            width: calc(100% - 40px);
-            max-width: 720px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-        .consent-actions {
-            display:flex;
-            gap:8px;
-            justify-content:flex-end;
-            margin-top:12px; flex-wrap:wrap;
-        }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
 
-        .btn {
-            padding:8px 14px;
-            border-radius:6px;
-            border: none;
-            cursor:pointer;
-        }
+    nav img {
+      height: 60px;
+      width: auto;
+    }
 
-        .btn.primary {
-            background:#0b74de;
-            color:#fff;
-        }
+    .nav-links,
+    .auth-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-        .btn.ghost {
-            background:#f3f4f6;
-            color:#111;
-        }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
 
-        /* prevent scrolling when consent-active is on body (JS toggles) */
-        body.consent-active {
-            height:100vh; overflow:hidden; touch-action:none;
-        }
+    /* Consent modal */
+    .consent-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
-        @media (max-width:600px) {
-            .consent-box { padding:16px; font-size:14px; }
-            .consent-actions { justify-content: center; }
-        }
+    .consent-box {
+      width: calc(100% - 40px);
+      max-width: 720px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .consent-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn.primary {
+      background: #0b74de;
+      color: #fff;
+    }
+
+    .btn.ghost {
+      background: #f3f4f6;
+      color: #111;
+    }
+
+    body.consent-active {
+      height: 100vh;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    /* MOBILE STYLING */
+    @media (max-width: 768px) {
+      nav .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      nav img {
+        height: 45px;
+      }
+
+      .nav-links,
+      .auth-links {
+        justify-content: center;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .consent-box {
+        padding: 16px;
+        font-size: 14px;
+      }
+
+      .consent-actions {
+        justify-content: center;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
 
   </style>
   @stack('styles')
 </head>
 <body>
-  <nav style="background:#da2128;color:#fff;padding:.75rem;">
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
-        <div style="display:flex;align-items:center;gap:1rem;">
-            <a href="{{ route('home') }}" style="color:#fff;text-decoration:none;font-weight:600;">Star Media Group</a>
-            <div>
-                <a href="{{ route('home') }}"  style="color:#fff;margin-right:12px;">Home</a>
-                <a href="{{ route('about') }}" style="color:#fff;margin-right:12px;">About</a>
-                <a href="{{ route('privacy') }}" style="color:#fff;margin-right:12px;">Privacy</a>
-                <a href="{{ route('terms') }}" style="color:#fff;">Terms</a>
-            </div>
-        </div>
-        <div>
-            <a href="{{ route('login') }}"  style="color:#fff;">Login</a>
-            <a href="{{ route('register') }}"  style="color:#fff;margin-left:12px;">Register</a>
-        </div>
+  <nav>
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center;">
+        <a href="{{ route('home') }}" style="display:flex;align-items:center;gap:8px;">
+          <img src="{{ asset('images/star-logo.png') }}" alt="Star Media Group Logo">
+        </a>
+      </div>
+
+      <div class="nav-links">
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('about') }}">About</a>
+        <a href="{{ route('privacy') }}">Privacy</a>
+        <a href="{{ route('terms') }}">Terms</a>
+      </div>
+
+      <div class="auth-links">
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+      </div>
     </div>
   </nav>
 
@@ -99,74 +183,71 @@
     @yield('content')
   </main>
 
-  <footer style="text-align:center;padding:1rem;margin-top:2rem;color:#666;">
+  <footer>
     © 2025 Star Media Group Berhad. All rights reserved.
   </footer>
 
-  {{-- Consent overlay markup (initially hidden by CSS/JS) --}}
+  {{-- Consent overlay markup --}}
   <div id="consent-overlay" class="consent-overlay" style="display:none;">
     <div class="consent-box" role="dialog" aria-modal="true" aria-labelledby="consent-title">
-        <h3 id="consent-title">Privacy & Cookies</h3>
-        <p>
-            Cookies are necessary for this website to function properly, for performance measurement,
-            and to provide you with the best experience.
-        </p>
-        <p>
-            By continuing to access or use this site, you acknowledge and consent to our use of cookies
-            in accordance with our <a href="{{ route('terms') }}" target="_self">Terms &amp; Conditions</a>
-            and <a href="{{ route('privacy') }}" target="_self">Privacy Statement</a>.
-        </p>
-        <div id="consent-button" class="consent-actions"
-                @if(!in_array(Route::currentRouteName(), ['terms', 'privacy']))
-                    style="display:none;"
-                @endif>
-            <button id="decline-consent" class="btn ghost">Decline</button>
-            <button id="accept-consent" class="btn primary">Accept</button>
-        </div>
+      <h3 id="consent-title">Privacy & Cookies</h3>
+      <p>
+        Cookies are necessary for this website to function properly, for performance measurement,
+        and to provide you with the best experience.
+      </p>
+      <p>
+        By continuing to access or use this site, you acknowledge and consent to our use of cookies
+        in accordance with our
+        <a href="{{ route('terms') }}" target="_self">[Terms &amp; Conditions]</a>
+        and
+        <a href="{{ route('privacy') }}" target="_self">[Privacy Statement]</a>.
+      </p>
+      <div id="consent-button" class="consent-actions"
+           @if(!in_array(Route::currentRouteName(), ['terms', 'privacy']))
+               style="display:none;"
+           @endif>
+        <button id="decline-consent" class="btn ghost">Decline</button>
+        <button id="accept-consent" class="btn primary">Accept</button>
+      </div>
     </div>
   </div>
 
   <script>
-
     document.addEventListener('DOMContentLoaded', function () {
-        const path = window.location.pathname;
-        const consentButton = document.getElementById('consent-button');
-        if (path === '/terms' || path === '/privacy') {
-            consentButton.style.display = 'flex';
-        } else {
-            consentButton.style.display = 'none';
-        }
+      const path = window.location.pathname;
+      const consentButton = document.getElementById('consent-button');
+      if (path === '/terms' || path === '/privacy') {
+        consentButton.style.display = 'flex';
+      } else {
+        consentButton.style.display = 'none';
+      }
 
-            const userConsent = @json($consent);
-            const overlay = document.getElementById('consent-overlay');
+      const userConsent = @json($consent);
+      const overlay = document.getElementById('consent-overlay');
 
-            if(userConsent.guid && userConsent.guid !== '') {
-                overlay.style.display = 'none';
-                document.body.classList.remove('consent-active');
-            }else{
-                overlay.style.display = 'flex';
-                document.body.classList.add('consent-active');
-}
+      if (userConsent.guid && userConsent.guid !== '') {
+        overlay.style.display = 'none';
+        document.body.classList.remove('consent-active');
+      } else {
+        overlay.style.display = 'flex';
+        document.body.classList.add('consent-active');
+      }
     });
 
-    // Helper: read cookie by name
     function readCookie(name) {
       const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
       return v ? decodeURIComponent(v.pop()) : null;
     }
 
-    // Show modal if neither accept cookie (site_consent) nor decline cookie (site_consent_decline) exists
     (function () {
       const consentCookie = readCookie('site_consent');
       const declineCookie = readCookie('site_consent_decline');
 
-      // if no consent and no decline (or expired), show
       if (!consentCookie && !declineCookie) {
         document.body.classList.add('consent-active');
         const overlay = document.getElementById('consent-overlay');
         overlay.style.display = 'flex';
 
-        // bind buttons
         document.getElementById('accept-consent').addEventListener('click', async function () {
           try {
             const res = await fetch('{{ route("consent.accept") }}', {
@@ -178,12 +259,8 @@
               body: JSON.stringify({})
             });
             if (res.ok) {
-              // response sets cookie via Set-Cookie; but ensure cookie is present client-side too
-              // hide overlay and restore scrolling
               overlay.style.display = 'none';
               document.body.classList.remove('consent-active');
-            } else {
-              console.error('Consent accept failed');
             }
           } catch (e) { console.error(e); }
         });
@@ -201,21 +278,9 @@
             if (res.ok) {
               overlay.style.display = 'none';
               document.body.classList.remove('consent-active');
-            } else {
-              console.error('Consent decline failed');
             }
           } catch (e) { console.error(e); }
         });
-
-        // make sure tab focus is inside modal (basic)
-        document.addEventListener('focus', function (ev) {
-          if (document.body.classList.contains('consent-active')) {
-            if (!overlay.contains(ev.target)) {
-              ev.stopPropagation();
-              overlay.querySelector('.consent-box').focus();
-            }
-          }
-        }, true);
       }
     })();
   </script>
