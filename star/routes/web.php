@@ -22,7 +22,7 @@ use App\Http\Controllers\AdminController;
 //     return view('welcome');
 // });
 
-
+/* Authentication Routes */
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
