@@ -41,24 +41,40 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Validate input
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        try {
+            // Validate input
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
 
-        // Attempt login
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            // Attempt login
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
 
-            return redirect()->intended('admin')->with('success', 'Login successful!');
+                return redirect()->intended('admin')
+                    ->with('success', 'Login successful!');
+            }
+
+            // Failed login
+            return back()->withErrors([
+                'login_error' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation exception
+            return back()->withErrors($e->errors())->withInput();
+
+        } catch (\Exception $e) {
+            // Handle unexpected errors
+            \Log::error('Login error: ' . $e->getMessage());
+
+            return back()->withErrors([
+                'login_error' => 'An unexpected error occurred. Please try again later.',
+            ])->withInput();
         }
-
-        // Failed login
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
     }
+
 
     public function logout(Request $request)
     {
